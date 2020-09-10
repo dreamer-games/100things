@@ -1,8 +1,0 @@
-<!--pages/result/index.wxml-->
-<view style="relative">
-<canvas type='2d' id="myCanvas" style="width:{{width1+'rpx'}};height:{{height1+'rpx'}}"></canvas>
-<scroll-view class="Canvas_Wrapper">
-<image  class="cover" hidden='{{!image_url}}' src="{{image_url}}" style="width:{{width+'rpx'}};height:{{height+'rpx'}}"></image>
-</scroll-view>
-<view class="Canvas_SaveToAlbum"><view bindtap="Save_ToAlbum" hover-class="Album_Submit" class="SaveToAlnum_Button">保存至本地相册</view></view>
-</view>

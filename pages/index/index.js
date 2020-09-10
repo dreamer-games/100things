@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var appInstance=getApp();
-var data_default=require('../data/index.js');
+var data_default=require('../../data/index.js');
 var data_things=data_default.inner
 const app = getApp();
 const  BASE_URL="http://photo.zhuxiaolun.com/100things/";
@@ -55,7 +55,7 @@ userInfoHandler:function(e){
       appInstance.globalData.select_list = this.data.select_list;
       appInstance.globalData.userInfo = e.detail.userInfo;
       wx.navigateTo({
-        url: '/pages/result_new/index',
+        url: '/pages/result/index',
       })
     } else {
         wx.showToast(
