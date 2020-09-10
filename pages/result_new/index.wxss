@@ -1,0 +1,139 @@
+/**index.wxss**/
+.Loading{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index:1;
+  
+}
+.Loading_Bar{
+  width:400rpx;
+  border:2rpx solid grey;
+  background-color: white;
+  position: relative;
+  height: 20rpx;
+  position: relative;
+}
+.Loading_BarInner{
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20rpx;
+  background-color:#09BB07;
+}
+.Top_Info{
+  margin-bottom: 5px;
+
+}
+.Things_Wrapper{
+  width: 100%;
+  height: auto;
+  /* background-color:blanchedalmond; */
+}
+.Things_innerWrapper{
+  padding:20rpx 50rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 80rpx;
+}
+#myCanvas{
+  position: absolute;
+  /* top: 0;  */
+  left:-999px;
+  /* display: none; */
+}
+.Things_Item{
+  width:140rpx;
+  /* height:140rpx; */
+  height: 180rpx;
+  display:inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+.Item_img{
+  width:120rpx;
+  height:120rpx;
+  margin-bottom: 8rpx;
+}
+.Item_intro{
+  width: 180rpx;
+  /* margin-top: 8rpx; */
+  font-size:16rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.select_icon{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* display: none; */
+}
+.Bottom_Wrapper{
+  height: 80rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  background-color: #8590a6;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Bottom_tips{
+  margin-left: 60rpx;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+.Bottom_Submit:not([size='mini']){
+  margin-right: 60rpx;
+  width: 160rpx;
+  height: 60rpx;
+  font-size: 30rpx; 
+  color: whitesmoke;
+  background-color: #09BB07;
+  border-radius: 5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Canvas_Wrapper{
+
+  margin-bottom: 80rpx;
+  min-height: 100vh;
+
+}
+.Canvas_SaveToAlbum{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 80rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.SaveToAlnum_Button{
+  background-color: #09BB07;
+  color: white;
+  font-weight: 500;
+  padding:8rpx 15rpx;
+}
+.Album_Submit{
+  background-color:green;
+}
+.cover{
+  vertical-align: top;
+  /* display: none; */
+}
