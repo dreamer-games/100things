@@ -1,4 +1,4 @@
-// pages/result_new/index.js
+
 Page({
 
   /**
@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data_default=require('../data/index.js');
+    var data_default=require('../../data/index.js');
     var data_things=data_default.inner;
    var that=this;
     var appInstance=getApp();
