@@ -61,7 +61,6 @@ Page({
     ctx.fillText('人生最想做的100件事'+item_account+'/100',375,294);
     var count=0;
     var url=appInstance.globalData.userInfo.avatarUrl;
-    // console.log(url);
     function draw(){
       ctx.draw(true,function(){
         wx.canvasToTempFilePath({
@@ -80,7 +79,6 @@ Page({
           },
           fail(res){
             // draw();
-            // console.log(res);
           },
         },that)
       });
@@ -88,7 +86,6 @@ Page({
     wx.getImageInfo({
       src: url,
       success(res) {
-        // console.log(res.path);
         ctx.drawImage(res.path,140, 80, 120,120);
         count+=1;
         if(count==list.length+2){
@@ -97,14 +94,10 @@ Page({
         
         
       }
-    });
-    // var url='../data/QRCode.jpg';
-   
+    });   
     wx.getImageInfo({
       src: new_url,
       success(res) {
-        // console.log(res.path);
-        // console.log('123');
         ctx.drawImage(res.path,470, 80, 120,120);
         count+=1;
         if(count==list.length+2){
@@ -128,7 +121,6 @@ Page({
           cb(res.path)
         },
         fail(error){
-          // console.log(error);
         }
  
       })
@@ -137,10 +129,8 @@ Page({
    
     var base_url="https://photo2.bigdreamer.com.cn/100things/";
     for (let i=0;i<list.length;i++){
-      // console.log(i);
       let index=list[i]
       var url=base_url+index+'.png';
-      // console.log(url);
       onImageLoad(url,function(img){
 
         var x=i%4;
@@ -152,8 +142,6 @@ Page({
         ctx.font="normal bold 16px self-serif"
         
         var content=data_things[index-1].name;
-        // console.log(content);
-        // content=content.split('\n');
         for (var j=0;j<content.length;j++){
           
           ctx.fillText(content[j],x*150+155,y*190+505+20*j);
@@ -169,13 +157,10 @@ Page({
 
         }
         count+=1;
-        // console.log(count);
         that.setData({
           percent:Math.round((count/(list.length+2))*100)
         })
-        // console.log(Math.round((count/(list.length+1))*100));
         if(count==list.length+2){
-          // console.log('success');
           draw();
         }
     

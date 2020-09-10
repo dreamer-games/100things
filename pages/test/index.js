@@ -46,12 +46,6 @@ Page({
     })
     current_height=current_height>800?current_height:800;
     canvas.height=current_height*rpx;
-   
-    console.log('rpx',rpx);
-    console.log('canvas_height',current_height);
-    console.log('canvas_width',canvas.width);
-    console.log('windows_width',SystemInfo.windowWidth);
-    console.log('windows_height',SystemInfo.windowHeight)
     ctx.fillStyle='#f6f6f6';
     ctx.fillRect(0,0,canvas.width,canvas.height)
     ctx.scale(rpx,rpx)
@@ -110,11 +104,9 @@ Page({
         ctx.fillStyle='black';
         ctx.textAlign='center';
         ctx.font="bold 16px sans-serif";
-        // console.log(data_things[index].name);
         var content=data_things[index].name;
         content=content.split('/n');
         for (var j=0;j<content.length;j++){
-          // console.log(content[j])
           ctx.fillText(content[j],x*150+155,y*190+510+20*j);
         }
         if(i==(list.length-1)){
@@ -125,7 +117,6 @@ Page({
 
         }
         count+=1;
-        console.log(count);
         if(count==list.length){
           wx.canvasToTempFilePath({
             x:0,
@@ -139,12 +130,10 @@ Page({
             quality: 1,
             success(res){
               // _this.setData({image_url:res.tempFilePath})
-              console.log('success');
               that.setData({image_url:res.tempFilePath});
             },
             fail(res){
-              console.log('failed');
-              console.log(res);
+
             }
           })
         }
@@ -179,7 +168,6 @@ Page({
                   })
                 },
                 fail( res){
-                  console.log('failed');
                 }
               })
       
@@ -191,7 +179,7 @@ Page({
                 duration:2000
               })
               wx.openSetting({
-                success: (res) => {console.log(res.authSetting)},
+                success: (res) => {},
               })
             }
           })
@@ -208,7 +196,6 @@ Page({
              
             },
             fail( res){
-              console.log('failed');
             }
           })
         

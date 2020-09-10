@@ -21,42 +21,27 @@ Page({
   onLoad: function (options) { 
     var appInstance=getApp();
     var list=appInstance.globalData.select_list;
-  //   list=Object.keys(Array.from({ length:98 })).map(function(item) {
-  //     return 1+parseInt(item);
-  // });
     var item_account=list.length;
-  
-  
-  
-
-    
-    // console.log(item_account)
-   var current_height=Math.floor((item_account-1)/4)*190+630;
+    var current_height=Math.floor((item_account-1)/4)*190+630;
     current_height=current_height>800?current_height:800;
-    
-    console.log('original'+current_height);
+
     this.setData({
       height:current_height
     });
   
-      wx.createSelectorQuery()
-      .select('#myCanvas')
-      .fields({
-        node:true,size:true
-      })
-      .exec(this.init.bind(this))
-    
-  
+    wx.createSelectorQuery()
+    .select('#myCanvas')
+    .fields({
+      node:true,size:true
+    })
+    .exec(this.init.bind(this))
   },
   init(res){
-   
-     var appInstance=getApp();
+    var appInstance=getApp();
     const SystemInfo=wx.getSystemInfoSync();
     var UserInfo=appInstance.globalData.userInfo;
     var list=appInstance.globalData.select_list;
-  //   list=Object.keys(Array.from({ length: 98 })).map(function(item) {
-  //     return 1+parseInt(item);
-  // });
+
   
     
     var item_account=list.length;
@@ -64,22 +49,15 @@ Page({
     current_height=current_height>800?current_height:800;
     let rpx=SystemInfo.windowWidth/375;
     const val=(current_height*rpx)/3000<1?1:3000/current_height;
-    // console.log(val);
     rpx=rpx*val;
     const canvas=res[0].node;
     // const canvas=wx.createOffscreenCanvas();
   
     var data_default=require('../data/index.js');
     var data_things=data_default.inner;
- 
     canvas.width=Math.floor(750*rpx);
-    canvas.height=Math.floor(current_height*rpx);
-    console.log('canvas_width',canvas.width);
-    console.log('canvas_height',canvas.height);
-    // console.log(current_height);
-  
-    const ctx=canvas.getContext('2d');
-  
+    canvas.height=Math.floor(current_height*rpx);  
+    const ctx=canvas.getContext('2d');  
     ctx.fillStyle='#f6f6f6';
     ctx.fillRect(0,0,canvas.width,canvas.height)
     ctx.scale(rpx,rpx)
@@ -87,7 +65,6 @@ Page({
     ctx.textAlign='center';
     ctx.textBaseline='top';
     ctx.font="normal bold 26px sans-serif";
-    console.log(UserInfo);
     ctx.fillText(UserInfo.nickName,200,208);
     var url='http://photo.zhuxiaolun.com/100things/1.png';
     var url=appInstance.globalData.userInfo.avatarUrl;
@@ -145,11 +122,7 @@ Page({
         ctx.fillStyle='black';
         ctx.textAlign='center';
         ctx.font="normal bold 16px sans-serif";
-        // console.log(data_things[index].name);
-        
         var content=data_things[index-1].name;
-      
-        // content=content.split('\n');
         for (var j=0;j<content.length;j++){
 
           ctx.fillText(content[j],x*150+155,y*190+510+20*j);
@@ -183,12 +156,10 @@ Page({
               
             },
             fail(res){
-              console.log('failed');
-              console.log(res);
+
             }
           })}
           catch(error){
-            console.log(error)
           }
         
         }
