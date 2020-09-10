@@ -1,45 +1,28 @@
-##人生必做的100件小事 小程序版 100things miniprogramme
+# 人生正在做的100件小事(小程序版) 
+## 来源: 网易|人生必做的100件小事
+## 100things mini programme
 
+前段时间自己动手实现的微信小程序版本的100件小事
 
+主题是人生正在做的100件小事
 
-scan wechat QR code
+写这个的目的主要是为了自我学习成长 
 
-<img src="/Users/lun/WeChatProjects/miniprogram-4/pages/data/QRCode.jpg" alt="QRCode" style="zoom:67%;text-align:left;" />
+学完以后收获颇丰 
 
+清晰了解了小程序的开发体系以及技术框架体系
 
+实现完后的页面效果为:
 
-欢迎学习参考
+<img src='https://github.com/zarazhu/100things/blob/master/data/WechatIMG1024.jpeg' width='400' />
 
+已经成功上线微信小程序 欢迎使用微信扫码访问
 
+welcome to scan with WeChat QR Code
 
-遇到的问题
+<img src="https://github.com/zarazhu/100things/blob/master/data/QRCode.jpg" width='140' alt="QRCode" style="zoom:67%;text-align:left;" />
 
-canvas drawimage 遇到bug
-示例代码:
-wx.getImageInfo({
-      src: url,
-      success:function(res){
-        console.log(res.path)
-        ctx.drawImage(res.path,0,0,50,50);
-      }})
-问题:
-Failed to execute 'drawImage' on 'CanvasRenderingContext2D'
-微信小程序官方文档没有写清楚
-在canvas type='2d'下 应该使用Canvas.createImage()方法
-但是在官方文档里只有如下内容 网上所有资料都是旧的:
-Image Canvas.createImage()
+本小程序的图片素材、文字素材版权均来自网易哒哒的人生必做的100件小事
 
-创建一个图片对象。 支持在 2D Canvas 和 WebGL Canvas 下使用, 但不支持混用 2D 和 WebGL 的方法。
+欢迎一起学习交流
 
-返回值
-Image
-
-修改后:
-var url=appInstance.globalData.userInfo.avatarUrl;
-var img=canvas.createImage();
-img.onload=function(){
-  ctx.drawImage(img,80,80,120,120);
-};
-img.src=url;
-
-问题解决！
