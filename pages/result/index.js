@@ -1,5 +1,4 @@
-// pages/result/index.js
-
+// pages/result_new/index.js
 Page({
 
   /**
@@ -12,129 +11,122 @@ Page({
     status:false,
     loading:true,
     percent:0
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) { 
+  onLoad: function (options) {
+    var data_default=require('../data/index.js');
+    var data_things=data_default.inner;
+   var that=this;
     var appInstance=getApp();
     var list=appInstance.globalData.select_list;
-  //   list=Object.keys(Array.from({ length:98 })).map(function(item) {
-  //     return 1+parseInt(item);
-  // });
-    var item_account=list.length;
-  
-  
-  
-
-    
-    // console.log(item_account)
-   var current_height=Math.floor((item_account-1)/4)*190+630;
-    current_height=current_height>800?current_height:800;
-    
-    console.log('original'+current_height);
-    this.setData({
-      height:current_height
-    });
-  
-      wx.createSelectorQuery()
-      .select('#myCanvas')
-      .fields({
-        node:true,size:true
-      })
-      .exec(this.init.bind(this))
-    
-  
-  },
-  init(res){
-   
-     var appInstance=getApp();
-    const SystemInfo=wx.getSystemInfoSync();
-    var UserInfo=appInstance.globalData.userInfo;
-    var list=appInstance.globalData.select_list;
-  //   list=Object.keys(Array.from({ length: 98 })).map(function(item) {
-  //     return 1+parseInt(item);
-  // });
-  
+    // list=Object.keys(Array.from({ length:98 })).map(function(item) {
+    // return 1+parseInt(item);
+    // });
     
     var item_account=list.length;
     var current_height=Math.floor((item_account-1)/4)*190+630;
     current_height=current_height>800?current_height:800;
+    this.setData({
+      height:current_height
+    });
+    const SystemInfo=wx.getSystemInfoSync();
+    var UserInfo=appInstance.globalData.userInfo;
+    var new_url='https://photo2.bigdreamer.com.cn/100things/cover.png';
     let rpx=SystemInfo.windowWidth/375;
-    const val=(current_height*rpx)/3000<1?1:3000/current_height;
-    // console.log(val);
-    rpx=rpx*val;
-    const canvas=res[0].node;
-    // const canvas=wx.createOffscreenCanvas();
-  
-    var data_default=require('../data/index.js');
-    var data_things=data_default.inner;
- 
-    canvas.width=Math.floor(750*rpx);
-    canvas.height=Math.floor(current_height*rpx);
-    console.log('canvas_width',canvas.width);
-    console.log('canvas_height',canvas.height);
-    // console.log(current_height);
-  
-    const ctx=canvas.getContext('2d');
-  
+    var ctx = wx.createCanvasContext('myCanvas',this);
+    // ctx.scale(1,1);
     ctx.fillStyle='#f6f6f6';
-    ctx.fillRect(0,0,canvas.width,canvas.height)
-    ctx.scale(rpx,rpx)
+    ctx.fillRect(0,0,750,current_height);
+    
     ctx.fillStyle='black';
     ctx.textAlign='center';
     ctx.textBaseline='top';
-    ctx.font="normal bold 26px sans-serif";
-    console.log(UserInfo);
+    // ctx.font="normal bold 26px sans-serif";
+    // ctx.setFontSize(26);
+    ctx.font="normal bold 24px self-serif";
+    ctx.setTextAlign('center');
+    ctx.setTextBaseline('top')
     ctx.fillText(UserInfo.nickName,200,208);
-    var url='http://photo.zhuxiaolun.com/100things/1.png';
-    var url=appInstance.globalData.userInfo.avatarUrl;
-    var img=canvas.createImage();
-    img.onload=function(){
-      ctx.drawImage(img,140,80,120,120);
-    };
-    // wx.getImageInfo({
-    //   src: url,
-    //   success(res) {
-    //     ctx.drawImage(res.path,140, 80, 120,120);
-    //   }
-    // });
-    img.src=url;
-    ctx.fillStyle='black';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    ctx.font="22px sans-serif";
-    ctx.fillText('标记您的100件事',530,210);
-
-    var url='../data/QRCode.jpg';
-    var img1=canvas.createImage();
-    img1.onload=function(){
-      ctx.drawImage(img1,470,80,120,120);
-    };
-    img1.src=url;
-
     ctx.fillStyle='black';
     ctx.fillRect(95,264,560,60);
     ctx.fillStyle="white";
-    ctx.font="normal bold 30px sans-serif";
+    // ctx.setFontSize(30);
+    ctx.font="normal bold 30px self-serif";
     ctx.textAlign='center'
     ctx.textBaseline='middle'
     ctx.fillText('人生最想做的100件事'+item_account+'/100',375,294);
-    // list.sort((a,b)=>a-b);
-
-    function onImageLoad(url,cb){
-      var img=canvas.createImage();
-      img.onload=function(){
-        cb(img)
-      }
-      img.src=url
-    }
-
     var count=0;
-    var base_url="http://photo.zhuxiaolun.com/100things/";
-    var that=this;
+    var url=appInstance.globalData.userInfo.avatarUrl;
+    function draw(){
+      ctx.draw(true,function(){
+        wx.canvasToTempFilePath({
+          x:0,
+          y:0,
+          width:750,
+          height:current_height,
+          destWidth:750,
+          destHeight:current_height,
+          fileType:'png',
+          canvasId: 'myCanvas',
+          quality: 1,
+          success(res){
+            
+            that.setData({image_url:res.tempFilePath,loading:false});
+          },
+          fail(res){
+            // draw();
+          },
+        },that)
+      });
+    }
+    wx.getImageInfo({
+      src: url,
+      success(res) {
+        ctx.drawImage(res.path,140, 80, 120,120);
+        count+=1;
+        if(count==list.length+2){
+           draw();
+        }
+        
+        
+      }
+    });   
+    wx.getImageInfo({
+      src: new_url,
+      success(res) {
+        ctx.drawImage(res.path,470, 80, 120,120);
+        count+=1;
+        if(count==list.length+2){
+          draw();
+        }  
+      }
+    });
+
+    // ctx.drawImage(url,470,80,120,120);
+    // ctx.setFontSize(22);
+    ctx.font="normal 22px self-serif"
+    ctx.setFillStyle('black');
+    ctx.setTextAlign('center');
+    ctx.setTextBaseline('top')
+    ctx.fillText('标记您的100件事',530,210);
+    
+    function onImageLoad(url,cb){
+      wx.getImageInfo({
+        src: url,
+        success(res){
+          cb(res.path)
+        },
+        fail(error){
+        }
+ 
+      })
+     }
+    
+   
+    var base_url="https://photo2.bigdreamer.com.cn/100things/";
     for (let i=0;i<list.length;i++){
       let index=list[i]
       var url=base_url+index+'.png';
@@ -144,63 +136,42 @@ Page({
         ctx.drawImage(img,x*150+95,y*190+370,120,120);
         ctx.fillStyle='black';
         ctx.textAlign='center';
-        ctx.font="normal bold 16px sans-serif";
-        // console.log(data_things[index].name);
+        // ctx.setFontSize(16);
+        ctx.font="normal bold 16px self-serif"
         
         var content=data_things[index-1].name;
-      
-        // content=content.split('\n');
         for (var j=0;j<content.length;j++){
-
-          ctx.fillText(content[j],x*150+155,y*190+510+20*j);
+          
+          ctx.fillText(content[j],x*150+155,y*190+505+20*j);
         }
        
         if(i==(list.length-1)){
           ctx.fillStyle='skyblue';
-          ctx.font="normal bold 18px sans-serif";
+          // ctx.setFontSize(18);
+          ctx.font="normal bold 18px self-serif"
+          
           ctx.fillText('本产品由大梦想家™ bigdreamer.com.cn支持',375,current_height-50)
           ctx.fillText('标记 分享 规划你的人生目标',375,current_height-30)
 
         }
         count+=1;
         that.setData({
-          percent:Math.round((count/list.length)*100,2)
+          percent:Math.round((count/(list.length+2))*100)
         })
-
-        if(count==list.length){
-          try{  wx.canvasToTempFilePath({
-            x:0,
-            y:0,
-            width:canvas.width,
-            height:canvas.height,
-            destWidth:canvas.width,
-            destHeight:canvas.height,
-            fileType:'jpg',
-            canvas: canvas,
-            quality: 0.7,
-            success(res){
-              that.setData({image_url:res.tempFilePath,loading:false});
-              
-            },
-            fail(res){
-              console.log('failed');
-              console.log(res);
-            }
-          })}
-          catch(error){
-            console.log(error)
-          }
-        
+        if(count==list.length+2){
+          draw();
         }
     
-      })
+      });
+    
     }
 
+   
+  
 
 
- 
     
-
+  
   },
   Save_ToAlbum(){
     var that=this;

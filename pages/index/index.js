@@ -4,10 +4,12 @@ var appInstance=getApp();
 var data_default=require('../data/index.js');
 var data_things=data_default.inner
 const app = getApp();
-var  base_url="http://photo.zhuxiaolun.com/100things/";
+const  BASE_URL="http://photo.zhuxiaolun.com/100things/";
+
 function get_url(val){
-  return base_url+val+'.png'
- }
+  return BASE_URL+val+'.png'
+}
+
 for (var item in data_things){
   var item=data_things[item];
   item['url']=get_url(item['index']);
@@ -19,30 +21,25 @@ Page({data:{
   select_list:[],
   total:0
 },
-onLoad:function(options){
-
-},
 item_click: function(event){
   var item_id=event.currentTarget.dataset.item;
   var select_list=this.data.select_list;
   var data_arr=this.data.data_arr;
   var total=this.data.total;
   var index=select_list.indexOf(item_id);
-  data_arr[item_id-1]['status']=!data_arr[item_id-1]['status'];
-  if(index!=-1){
-    select_list.splice(index,1);
+  data_arr[item_id - 1]['status']=!data_arr[item_id - 1]['status'];
+  if(index != -1){
+    select_list.splice(index, 1);
     this.setData({
-      data_arr:data_arr,
-      select_list:select_list,
-      total:total-1,
-    })
-
-  }else{
+      data_arr: data_arr,
+      select_list: select_list,
+      total: total-1,
+    })} else{
     select_list.push(item_id);
     this.setData({
-      data_arr:data_arr,
-      select_list:select_list,
-      total:total+1
+      data_arr: data_arr,
+      select_list: select_list,
+      total:total + 1
     })
   }
 },
@@ -55,26 +52,19 @@ userInfoHandler:function(e){
     })
   }else{
     if(e.detail.userInfo){
-      appInstance.globalData.select_list=this.data.select_list;
-      appInstance.globalData.userInfo=e.detail.userInfo;
-      // console.log( appInstance.globalData.userInfo);
-      // console.log( appInstance.globalData.select_list);
+      appInstance.globalData.select_list = this.data.select_list;
+      appInstance.globalData.userInfo = e.detail.userInfo;
       wx.navigateTo({
         url: '/pages/result_new/index',
       })
-    }
-    else{
-          wx.showToast({
-              title: '请打开允许访问头像权限',
-              icon:'none',
-              duration:2000
-            })
+    } else {
+        wx.showToast(
+          {
+            title: '请打开允许访问头像权限',
+            icon:'none',
+            duration:2000
+          })
     }
   }
-
- 
 },
-
-
-
 });
