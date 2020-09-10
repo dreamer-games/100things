@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+<view class='Top_Info'>
+<text>人生最想做的100件事 标记一下吧！</text>
+</view>
+ <scroll-view class="Things_Wrapper">
+ <view class="Things_innerWrapper">
+ <view class="Things_Item" wx:for="{{data_arr}}" wx:key="index" bindtap="item_click" data-item="{{item.index}}">
+ <image src="{{item.url}}" class="Item_img"></image>
+ <text class="Item_intro" wx:for="{{item.name}}">{{item}}</text>
+ <icon wx:if="{{item.status}}" type="success" class="select_icon" size="20"/>
+ <view wx:if="{{item.status}}" class="icon_cover"></view>
+ </view>
+</view>
+</scroll-view>
+<view class="Bottom_Wrapper">
+<view class="Bottom_tips">
+<icon type="success" size="20" style="margin-right:10rpx;"></icon>
+<text style="width:130rpx">总计:{{total}}</text>
+</view >
+<view class="Bottom_SubmitMenu">
+<button class="Bottom_Submit"  open-type="getUserInfo" bindgetuserinfo="userInfoHandler">提交</button>
+</view>
+</view>
+</view>

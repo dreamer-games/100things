@@ -1,0 +1,14 @@
+{
+  "pages": [ 
+    "pages/index/index",
+    "pages/result_new/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "人生最想做的100件事",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
