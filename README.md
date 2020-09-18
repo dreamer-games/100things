@@ -18,7 +18,7 @@
 
 已经成功上线微信小程序 欢迎使用微信扫码访问
 
-welcome to scan with WeChat QR Code
+Welcome to scan with WeChat QR Code
 
 <img src="https://github.com/zarazhu/100things/blob/master/data/QRCode.jpg" width='140' alt="QRCode" style="zoom:67%;text-align:left;" />
 
