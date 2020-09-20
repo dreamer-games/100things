@@ -1,4 +1,4 @@
-export const inner=
+export const inner = 
   [
     {index:1,name:'看极光'},
     {index:2,name:'一次/n无计划的旅行'},
